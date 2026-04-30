@@ -1,0 +1,118 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(250, 248, 245, 0.92);
+  backdrop-filter: blur(8px);
+  z-index: 50;
+  animation: fade-in var(--duration-base) var(--ease-soft);
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  padding: 32px 24px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  overflow: hidden;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  margin: 12px 0 4px;
+  color: var(--color-text);
+}
+
+.subtitle {
+  color: var(--color-muted);
+  margin: 0 0 24px;
+  font-size: 14px;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.stat {
+  padding: 12px 6px;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+}
+
+.statValue {
+  font-family: var(--font-numbers);
+  font-size: 18px;
+  color: var(--color-user);
+  font-variant-numeric: tabular-nums;
+}
+
+.statLabel {
+  font-size: 11px;
+  color: var(--color-muted);
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.primary {
+  padding: 14px;
+  background: var(--color-accent-sage);
+  color: #2a3a26;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  transition: transform var(--duration-fast);
+}
+
+.primary:active { transform: scale(0.97); }
+
+.secondary {
+  padding: 14px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti span {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: confetti-fall 2.4s var(--ease-soft) forwards;
+}
+
+@keyframes confetti-fall {
+  0%   { transform: translate(0, -20px) rotate(0); opacity: 0; }
+  10%  { opacity: 1; }
+  100% { transform: translate(var(--dx, 0), 320px) rotate(540deg); opacity: 0; }
+}
+
+.trophy {
+  font-size: 48px;
+  line-height: 1;
+}

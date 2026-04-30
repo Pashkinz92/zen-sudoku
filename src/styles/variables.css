@@ -1,0 +1,49 @@
+:root {
+  /* Surfaces */
+  --color-bg: #faf8f5;
+  --color-surface: #ffffff;
+  --color-border: #e2ddd8;
+  --color-border-strong: #2d2a26;
+
+  /* Cell states */
+  --color-cell: #ffffff;
+  --color-cell-selected: #d4caf0;
+  --color-cell-peer: #f0ece5;
+  --color-cell-same: #f5e6e6;
+  --color-cell-error: #f0a090;
+
+  /* Text */
+  --color-clue: #2d2a26;
+  --color-user: #5c5490;
+  --color-notes: #9e9e9e;
+  --color-text: #2d2a26;
+  --color-muted: #8a847e;
+
+  /* Accents */
+  --color-accent-rose: #e8a5a5;
+  --color-accent-sage: #a8c5a0;
+  --color-accent-rose-soft: #f5e0e0;
+  --color-accent-sage-soft: #dde9d9;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-numbers: 'DM Serif Display', Georgia, serif;
+  --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* Layout */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --shadow-card: 0 12px 32px -16px rgba(45, 42, 38, 0.18), 0 2px 8px -2px rgba(45, 42, 38, 0.06);
+  --shadow-soft: 0 6px 18px -10px rgba(45, 42, 38, 0.18);
+
+  /* Animation */
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 140ms;
+  --duration-base: 220ms;
+
+  /* Safe-area aware bottom inset */
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}

@@ -1,0 +1,61 @@
+.cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-cell);
+  font-family: var(--font-numbers);
+  font-size: clamp(20px, 5.6vw, 30px);
+  color: var(--color-user);
+  user-select: none;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-soft);
+  overflow: hidden;
+}
+
+.cell.clue {
+  color: var(--color-clue);
+  font-weight: 600;
+}
+
+.cell.peer {
+  background: var(--color-cell-peer);
+}
+
+.cell.sameValue {
+  background: var(--color-cell-same);
+}
+
+.cell.selected {
+  background: var(--color-cell-selected);
+  animation: pulse-select 600ms var(--ease-soft);
+}
+
+.cell.error {
+  color: #b04030;
+  background: var(--color-cell-error);
+}
+
+.cell.placed {
+  animation: pop 220ms var(--ease-soft);
+}
+
+.notes {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  padding: 2px;
+  font-family: var(--font-ui);
+  font-size: clamp(8px, 2vw, 11px);
+  color: var(--color-notes);
+  pointer-events: none;
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}

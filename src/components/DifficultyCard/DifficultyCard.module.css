@@ -1,0 +1,57 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 18px 20px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  text-align: left;
+  transition: transform var(--duration-fast) var(--ease-soft);
+}
+
+.card:active {
+  transform: scale(0.98);
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.label {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.meta {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.dot {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.dot span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border);
+}
+
+.dot.easy span:nth-child(-n+1),
+.dot.medium span:nth-child(-n+2),
+.dot.hard span:nth-child(-n+3) {
+  background: var(--color-accent-sage);
+}
+
+.dot.medium span:nth-child(-n+2):nth-child(n+2),
+.dot.hard span:nth-child(-n+3):nth-child(n+2) {
+  background: var(--color-accent-rose);
+}

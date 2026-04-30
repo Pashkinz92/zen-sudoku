@@ -1,0 +1,39 @@
+.wrap {
+  width: 100%;
+  max-width: min(92vw, 480px);
+  margin: 0 auto;
+  padding: 6px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  background: var(--color-border-strong);
+  gap: 1px;
+  padding: 2px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* Thicker dividers between 3x3 boxes via larger gap rows/cols */
+.grid > :global(button):nth-child(3n) {
+  border-right: 2px solid var(--color-border-strong);
+  margin-right: -1px;
+}
+
+.grid > :global(button):nth-child(9n) {
+  border-right: none;
+  margin-right: 0;
+}
+
+.grid > :global(button):nth-child(n+19):nth-child(-n+27),
+.grid > :global(button):nth-child(n+46):nth-child(-n+54) {
+  border-bottom: 2px solid var(--color-border-strong);
+  margin-bottom: -1px;
+}
