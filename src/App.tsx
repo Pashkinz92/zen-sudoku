@@ -15,7 +15,49 @@ import {
   recordGameWon,
   useStats,
 } from './hooks/usePersistence';
+import { useOfflineStatus } from './hooks/useOfflineStatus';
+import type { OfflineState } from './hooks/useOfflineStatus';
 import type { Difficulty } from './utils/types';
+
+function OfflineBadge({
+  state,
+  isPersistent,
+  cacheSizeMB,
+}: {
+  state: OfflineState;
+  isPersistent: boolean;
+  cacheSizeMB: number | null;
+}) {
+  if (state === 'unsupported') return null;
+  const sizeStr = cacheSizeMB !== null ? ` · ${cacheSizeMB} MB` : '';
+  const persistedStr = isPersistent ? ' · pinned' : '';
+  let label = '';
+  let cls = '';
+  let onClick: (() => void) | undefined;
+  if (state === 'pending') {
+    label = `Saving for offline${sizeStr}…`;
+    cls = styles.pending;
+  } else if (state === 'ready') {
+    label = `Available offline${sizeStr}${persistedStr}`;
+    cls = styles.ready;
+  } else {
+    label = 'Update ready · tap to refresh';
+    cls = styles.updated;
+    onClick = () => window.location.reload();
+  }
+  return (
+    <button
+      type="button"
+      className={`${styles.offlineBadge} ${cls}`}
+      onClick={onClick}
+      disabled={!onClick}
+      aria-label={label}
+    >
+      <span className={styles.offlineDot} />
+      <span>{label}</span>
+    </button>
+  );
+}
 
 type Screen = 'home' | 'game' | 'stats';
 
@@ -32,6 +74,7 @@ export function App() {
 
   const sudoku = useSudoku(null);
   const timer = useTimer(0, false);
+  const offline = useOfflineStatus();
 
   const showToast = useCallback((msg: string, duration = 1800) => {
     setToast(msg);
@@ -238,13 +281,20 @@ export function App() {
           </div>
 
           <div className={styles.footer}>
-            <button
-              type="button"
-              className={styles.footerLink}
-              onClick={() => setScreen('stats')}
-            >
-              Statistics
-            </button>
+            <OfflineBadge
+              state={offline.state}
+              isPersistent={offline.isPersistent}
+              cacheSizeMB={offline.cacheSizeMB}
+            />
+            <div className={styles.footerLinks}>
+              <button
+                type="button"
+                className={styles.footerLink}
+                onClick={() => setScreen('stats')}
+              >
+                Statistics
+              </button>
+            </div>
           </div>
         </div>
       </div>

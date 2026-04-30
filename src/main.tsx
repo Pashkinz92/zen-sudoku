@@ -11,6 +11,8 @@ import '@fontsource/playfair-display/600.css';
 import '@fontsource/playfair-display/700.css';
 import './styles/global.css';
 import { App } from './App';
+import { requestPersistentStorage } from './hooks/useOfflineStatus';
+import type { OfflineState } from './hooks/useOfflineStatus';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -18,14 +20,30 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 );
 
+function setOfflineState(s: OfflineState) {
+  window.__offlineState = s;
+  window.dispatchEvent(new CustomEvent<OfflineState>('pwa:state', { detail: s }));
+}
+
 if ('serviceWorker' in navigator) {
+  setOfflineState('pending');
   registerSW({
     immediate: true,
+    onRegisteredSW(_url, registration) {
+      // If the SW is already active when we register, the precache is in place.
+      if (registration?.active) {
+        setOfflineState('ready');
+      }
+    },
     onOfflineReady() {
-      console.info('[PWA] Ready to work offline');
+      setOfflineState('ready');
     },
     onNeedRefresh() {
-      console.info('[PWA] New version available — reload to update');
+      setOfflineState('updated');
     },
   });
+
+  // Ask the browser to keep our data even if storage gets tight or app is unused.
+  // Safe to call on every load; no-op once already persistent.
+  void requestPersistentStorage();
 }
